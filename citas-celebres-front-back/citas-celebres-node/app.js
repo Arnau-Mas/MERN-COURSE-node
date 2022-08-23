@@ -16,8 +16,6 @@ app.get("/citarandom", (req,res) => {
     res.json(randomQuote)
 })
 
-app.get
-
 app.get("*", (req,res) => {
     res.send("Ruta no existeix")
 })
