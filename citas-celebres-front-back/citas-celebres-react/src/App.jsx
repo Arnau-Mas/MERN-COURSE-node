@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react'
 
 function App() {
-  const [cita, setCita] = useState({})
+  const [cita, setCita] = useState({});
 
   useEffect(() => {
     fetch("http://localhost:5000/citarandom")
       .then(res => res.json())
       .then(data => setCita(data))
+      .catch(err => console.log(err))
   }, [])
 
   return (
