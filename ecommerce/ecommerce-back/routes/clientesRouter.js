@@ -96,13 +96,14 @@ router.put('/:id', function (req, res, next) {
         const newCliente = {
             email,
             nombre,
-            descripcion,
+            direccion,
             poblacion,
             cpostal,
             password
         }
-        //busquem l'alumne en qüestió
-        Cliente.findOne({ where: { idarticulos: req.params.id } })
+        console.log(newCliente)
+
+        Cliente.findOne({ where: { id: req.params.id } })
             .then((cliente) =>
                 cliente.update(newCliente)
             )
@@ -124,7 +125,7 @@ router.put('/:id', function (req, res, next) {
 
 router.delete('/:id', function (req, res) {
     sequelize.sync().then(() => {
-        Cliente.destroy({ where: { idarticulos: req.params.id } })
+        Cliente.destroy({ where: { id: req.params.id } })
             .then((data) => res.json({ ok: true, data }))
             .catch((error) => res.json({ ok: false, error:error.message }))
 
