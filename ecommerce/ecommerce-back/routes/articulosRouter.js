@@ -5,10 +5,6 @@ import sequelize from "../loadSequelize.js";
 const router = express.Router();
 
 const Articulo = sequelize.define('Articulo', {
-    idarticulos:{
-        type:DataTypes.INTEGER,
-        primaryKey:true
-    },
     nombre: DataTypes.STRING(150),
     descripcion:DataTypes.STRING(1500),
     precio:DataTypes.FLOAT(10,2),
@@ -112,7 +108,7 @@ router.put('/:id', function (req, res, next) {
 
 router.delete('/:id', function (req, res) {
     sequelize.sync().then(() => {
-        Articulo.destroy({ where: { idarticulos: req.params.id } })
+        Articulo.destroy({ where: { id: req.params.id } })
             .then((data) => res.json({ ok: true, data }))
             .catch((error) => res.json({ ok: false, error:error.message }))
 
