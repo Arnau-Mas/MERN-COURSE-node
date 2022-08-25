@@ -66,6 +66,7 @@ router.get("/:id", (req,res) => {
 });
 
 router.post('/', (req, res) => {
+    
     sequelize.sync().then(() => {
         Articulo.create(req.body)
             .then((item) => res.json({ ok: true, data: item }))
@@ -79,10 +80,49 @@ router.post('/', (req, res) => {
     });
 });
 
-/* router.put("/:id", (req,res) => {
+router.put('/:id', function (req, res, next) {
     sequelize.sync().then(() => {
-        Articulo.update(req.body)
-    })
-}) */
+        const {nombre, descripcion, precio, estoc} = req.body;
+        const newArticulo = {
+            nombre,
+            descripcion,
+            precio,
+            estoc
+        }
+        //busquem l'alumne en qüestió
+        Articulo.findOne({ where: { idarticulos: req.params.id } })
+            .then((articulo) =>
+                articulo.update(newArticulo)
+            )
+            .then((articuloRes) => res.json({
+                ok: true,
+                data: articuloRes
+            }))
+            .catch(error => res.json({
+                ok: false,
+                error: error.message
+            }));
+    }).catch((error) => {
+        res.json({
+            ok: false,
+            error: error
+        })
+    });
+});
+
+router.delete('/:id', function (req, res) {
+    sequelize.sync().then(() => {
+        Articulo.destroy({ where: { idarticulos: req.params.id } })
+            .then((data) => res.json({ ok: true, data }))
+            .catch((error) => res.json({ ok: false, error:error.message }))
+
+    }).catch((error) => {
+        res.json({
+            ok: false,
+            error: error
+        })
+    });
+
+});
 
 export default router;
