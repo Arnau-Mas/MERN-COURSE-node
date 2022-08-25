@@ -1,34 +1,30 @@
 import express from "express";
-import { AggregateError, DataTypes } from "sequelize";
-import sequelize from "./loadSequelize.js";
-import cors from "cors";
-import articulosRouter from "./routes/articulosRouter.js";
+import {DataTypes} from "sequelize";
+import sequelize from "../loadSequelize.js";
 
-const app = express();
+
 const router = express.Router();
 
-app.use(express.json())
-app.use(cors());
-app.use("/articulos", articulosRouter)
-
-const Linea = sequelize.define('Linea', {
-    idlineas:{
-        type: DataTypes.INTEGER,
+const Articulo = sequelize.define('Articulo', {
+    idarticulos:{
+        type:DataTypes.INTEGER,
         primaryKey:true
     },
-    cantidad: DataTypes.FLOAT
-}, { tableName: 'lineas', timestamps: false });
+    nombre: DataTypes.STRING(150),
+    descripcion:DataTypes.STRING(1500),
+    precio:DataTypes.FLOAT(10,2),
+    estoc:DataTypes.FLOAT(10,2)
+}, { tableName: 'articulos', timestamps: false });
 
-app.get("/", (req,res) => res.send("api"))
- 
-app.get("/lineas", (req,res) => {
+
+router.get("/", (req,res) => (req,res) => {
     sequelize.sync().then(() => { 
-        Linea.findAll()
-            .then(lineas =>{
+        Articulo.findAll()
+            .then(articulos =>{
                 console.log("entrant *************");
                 res.json({ 
                     ok: true,
-                    data: lineas
+                    data: articulos
                 })
             }
             )
@@ -45,14 +41,12 @@ app.get("/lineas", (req,res) => {
             error: error.message
         })
     });
-
 });
 
-
-app.post('/lineas', function (req, res, next) {
+router.post('/articulos', function (req, res, next) {
     console.log(req.body)
     sequelize.sync().then(() => {
-        Linea.create(req.body)
+        Articulo.create(req.body)
             .then((item) => res.json({ ok: true, data: item }))
             .catch((error) => res.json({ ok: false, error }))
 
@@ -64,6 +58,4 @@ app.post('/lineas', function (req, res, next) {
     });
 });
 
-
-
-app.listen(3000, () => console.log("Server running at http://localhost:3000"));
+export default router;
