@@ -1,13 +1,13 @@
-import Navbar from "./components/Navbar"
+import {Navbar} from "./components/Navbar"
+import { Sidebar } from "./components/Sidebar"
+import { TableCards } from "./components/TableCards"
 
 function App() {
 
   return (
-    <div>
+    <div className="bg-gray-200">
       <Navbar/>
-      <h1 className="font-bold text-2xl text-red-900">
-        React and Tailwind with Vitejs!
-      </h1>
+      <TableCards/>
     </div>
   )
 }
