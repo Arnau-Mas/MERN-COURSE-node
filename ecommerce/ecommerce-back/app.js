@@ -3,13 +3,14 @@ import { AggregateError, DataTypes } from "sequelize";
 import sequelize from "./loadSequelize.js";
 import cors from "cors";
 import articulosRouter from "./routes/articulosRouter.js";
+import clientesRouter from "./routes/clientesRouter.js";
 
 const app = express();
-const router = express.Router();
 
 app.use(express.json())
 app.use(cors());
 app.use("/articulos", articulosRouter)
+app.use("/clientes", clientesRouter)
 
 const Linea = sequelize.define('Linea', {
     idlineas:{

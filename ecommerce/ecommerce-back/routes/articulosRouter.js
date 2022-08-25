@@ -2,7 +2,6 @@ import express from "express";
 import {DataTypes} from "sequelize";
 import sequelize from "../loadSequelize.js";
 
-
 const router = express.Router();
 
 const Articulo = sequelize.define('Articulo', {
@@ -17,11 +16,10 @@ const Articulo = sequelize.define('Articulo', {
 }, { tableName: 'articulos', timestamps: false });
 
 
-router.get("/", (req,res) => (req,res) => {
+router.get("/", (req,res) => {
     sequelize.sync().then(() => { 
         Articulo.findAll()
             .then(articulos =>{
-                console.log("entrant *************");
                 res.json({ 
                     ok: true,
                     data: articulos
@@ -29,7 +27,6 @@ router.get("/", (req,res) => (req,res) => {
             }
             )
             .catch(error => {
-                console.log("********+error")
                 res.json({
                     ok: false,
                     error: error.message
@@ -40,11 +37,35 @@ router.get("/", (req,res) => (req,res) => {
             ok: false,
             error: error.message
         })
-    });
+    }); 
 });
 
-router.post('/articulos', function (req, res, next) {
-    console.log(req.body)
+router.get("/:id", (req,res) => {
+    const id = req.params.id;
+    sequelize.sync().then(() => { 
+        Articulo.findOne({where: {idarticulos:id}})
+            .then(articulo =>{
+                res.json({ 
+                    ok: true,
+                    data: articulo
+                })
+            }
+            )
+            .catch(error => {
+                res.json({
+                    ok: false,
+                    error: error.message
+                })
+            })
+    }).catch((error) => {
+        res.json({
+            ok: false,
+            error: error.message
+        })
+    }); 
+});
+
+router.post('/', (req, res) => {
     sequelize.sync().then(() => {
         Articulo.create(req.body)
             .then((item) => res.json({ ok: true, data: item }))
@@ -57,5 +78,11 @@ router.post('/articulos', function (req, res, next) {
         })
     });
 });
+
+/* router.put("/:id", (req,res) => {
+    sequelize.sync().then(() => {
+        Articulo.update(req.body)
+    })
+}) */
 
 export default router;
