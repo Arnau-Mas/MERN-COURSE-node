@@ -1,7 +1,7 @@
 
 export const Sidebar = () => {
   return (
-    <div className="min-w-m h-screen shadow-md bg-white fixed mt-16" id="sidenavSecExample">
+    <div className="h-screen shadow-md bg-white fixed mt-16" id="sidenavSecExample">
     <ul className="w-72 px-1">
       <li className="">
         <h4 className="flex mt-4 items-center text-xl justify-center align-middle  h-12 overflow-hidden text-ellipsis whitespace-nowrap rounded transition duration-300 ease-in-out"data-mdb-ripple="true" data-mdb-ripple-color="primary">
