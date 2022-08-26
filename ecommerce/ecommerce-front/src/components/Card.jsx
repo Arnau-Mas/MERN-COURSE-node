@@ -1,5 +1,5 @@
 export const Card = ({articulo}) => {
-    console.log(articulo)
+    // console.log(articulo)
   return (
     
 <div className="w-full max-w-sm bg-white rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">

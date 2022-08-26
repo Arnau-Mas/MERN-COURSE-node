@@ -16,11 +16,17 @@ export const TableCards = () => {
   }, [])
   
   return (
-    <div className="flex flex-row gap-2">
-        <Sidebar/>
+    <div className="flex flex-row">
+      <Sidebar/>
         <div className="flex flex-row flex-wrap">
           {articulos.length===0 ? 
-          <p>No articulos</p>
+          <div style={{display:"flex", flexWrap:"wrap"}}>
+              <Card articulo={{nombre:"aaaa", precio:"aaaa"}}/>
+              <Card articulo={{nombre:"aaaa", precio:"aaaa"}}/>
+              <Card articulo={{nombre:"aaaa", precio:"aaaa"}}/>
+              <Card articulo={{nombre:"aaaa", precio:"aaaa"}}/>
+              <Card articulo={{nombre:"aaaa", precio:"aaaa"}}/>
+          </div>
           :
           articulos.map(articulo => <Card key={articulo.id} articulo={articulo}/>)
           }

@@ -1,8 +1,8 @@
 
 export const Sidebar = () => {
   return (
-    <div className="w-96 h-screen static shadow-md bg-white" id="sidenavSecExample">
-    <ul className=" px-1">
+    <div className="min-w-m h-screen shadow-md bg-white fixed mt-16" id="sidenavSecExample">
+    <ul className="w-72 px-1">
       <li className="">
         <h4 className="flex mt-4 items-center text-xl justify-center align-middle  h-12 overflow-hidden text-ellipsis whitespace-nowrap rounded transition duration-300 ease-in-out"data-mdb-ripple="true" data-mdb-ripple-color="primary">
         Tendencias

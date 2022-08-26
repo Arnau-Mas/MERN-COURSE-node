@@ -1,10 +1,11 @@
 import {Navbar} from "./components/Navbar"
+import { Sidebar } from "./components/Sidebar"
 import { TableCards } from "./components/TableCards"
 
 function App() {
 
   return (
-    <div className="bg-gray-200">
+    <div className="bg-gray-200 relative">
       <Navbar/>
       <TableCards/>
     </div>
