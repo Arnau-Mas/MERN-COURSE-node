@@ -20,17 +20,10 @@ const Factura = sequelize.define('Factura', {
     poblacion:DataTypes.STRING(100),
     cpostal: DataTypes.STRING(10),
     nombre: DataTypes.STRING(150),
-    ClienteId:{
-        type: DataTypes.INTEGER,
-        field:"ClienteId",
-        references:{
-            model:Cliente,
-            key:"id"
-        }
-    }
+    ClienteId:DataTypes.INTEGER,
 }, { tableName: 'facturas', timestamps: false });
 
-Factura.belongsTo(Cliente);
+/* Factura.belongsTo(Cliente); */
 
 router.get("/", (req,res) => {
     sequelize.sync().then(() => {
