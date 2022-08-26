@@ -5,7 +5,7 @@ import { BellIcon, ShoppingCartIcon, MenuIcon, XIcon } from '@heroicons/react/ou
 import {Sidebar} from "./Sidebar.jsx"
 
 const navigation = [
-  { name: 'Articulos', href: '#', current: true },
+  { name: 'Artículos', href: '#', current: true },
   { name: 'Facturas', href: '#', current: false },
   { name: 'Projects', href: '#', current: false },
   { name: 'Calendar', href: '#', current: false },
