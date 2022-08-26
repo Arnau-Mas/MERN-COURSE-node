@@ -13,9 +13,28 @@ const Cliente = sequelize.define("Cliente", {
     password:DataTypes.STRING(150),
 }, { tableName: 'clientes', timestamps: false })
 
+const Factura = sequelize.define('Factura', {
+    numero: DataTypes.STRING(15),
+    fecha:DataTypes.DATE,
+    direccion:DataTypes.STRING(150),
+    poblacion:DataTypes.STRING(100),
+    cpostal: DataTypes.STRING(10),
+    nombre: DataTypes.STRING(150),
+    ClienteId:{
+        type:DataTypes.INTEGER,
+        field:"ClienteId",
+        references:{
+            model:Cliente,
+            key:"id"
+        }
+    }
+}, { tableName: 'facturas', timestamps: false });
+
+Cliente.hasMany(Factura);
+
 router.get("/", (req,res) => {
     sequelize.sync().then(() => {
-        Cliente.findAll()
+        Cliente.findAll({ include:{model: Factura} })
             .then(clientes => {
                 res.json({
                     ok:true,
@@ -125,9 +144,14 @@ router.put('/:id', function (req, res, next) {
 
 router.delete('/:id', function (req, res) {
     sequelize.sync().then(() => {
-        Cliente.destroy({ where: { id: req.params.id } })
-            .then((data) => res.json({ ok: true, data }))
-            .catch((error) => res.json({ ok: false, error:error.message }))
+        let clienteToDelete = {};
+        Cliente.findOne({ where: { id: req.params.id } })
+            .then(cliente => clienteToDelete = cliente)
+            .then(
+                Cliente.destroy({ where: { id: req.params.id } })
+                .then((data) => res.json({ ok: true, data, itemDeleted: clienteToDelete }))
+                .catch((error) => res.json({ ok: false, error:error.message }))
+            )
 
     }).catch((error) => {
         res.json({

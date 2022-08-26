@@ -4,6 +4,7 @@ import sequelize from "./loadSequelize.js";
 import cors from "cors";
 import articulosRouter from "./routes/articulosRouter.js";
 import clientesRouter from "./routes/clientesRouter.js";
+import facturasRouter from "./routes/facturasRouter.js";
 
 const app = express();
 
@@ -11,7 +12,7 @@ app.use(express.json())
 app.use(cors());
 app.use("/articulos", articulosRouter)
 app.use("/clientes", clientesRouter)
-
+app.use("/facturas", facturasRouter)
 app.get("/", (req,res) => res.send("api"))
  
 

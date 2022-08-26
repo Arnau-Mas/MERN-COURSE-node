@@ -58,7 +58,7 @@ router.get("/:id", (req,res) => {
             ok: false,
             error: error.message
         })
-    }); 
+    });
 });
 
 router.post('/', (req, res) => {
@@ -76,7 +76,7 @@ router.post('/', (req, res) => {
     });
 });
 
-router.put('/:id', function (req, res, next) {
+router.put('/:id', function (req, res) {
     sequelize.sync().then(() => {
         const {nombre, descripcion, precio, estoc} = req.body;
         const newArticulo = {
@@ -86,7 +86,7 @@ router.put('/:id', function (req, res, next) {
             estoc
         }
         //busquem l'alumne en qüestió
-        Articulo.findOne({ where: { idarticulos: req.params.id } })
+        Articulo.findOne({ where: { id: req.params.id } })
             .then((articulo) =>
                 articulo.update(newArticulo)
             )
@@ -108,9 +108,14 @@ router.put('/:id', function (req, res, next) {
 
 router.delete('/:id', function (req, res) {
     sequelize.sync().then(() => {
-        Articulo.destroy({ where: { id: req.params.id } })
-            .then((data) => res.json({ ok: true, data }))
-            .catch((error) => res.json({ ok: false, error:error.message }))
+        let articleToDelete = {};
+        Articulo.findOne({ where: { id: req.params.id } })
+            .then(articulo => articleToDelete = articulo)
+            .then(
+                Articulo.destroy({ where: { id: req.params.id } })
+                .then((data) => res.json({ ok: true, data, itemDeleted: articleToDelete }))
+                .catch((error) => res.json({ ok: false, error:error.message }))
+            )
 
     }).catch((error) => {
         res.json({
