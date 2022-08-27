@@ -1,6 +1,8 @@
+import { Link } from "react-router-dom";
+
 export const Card = ({ articulo }) => {
     return (
-        <div className="flex max-w-sm min-w-sm bg-white shadow-lg rounded-lg overflow-hidden">
+        <Link to={`/articulo/${articulo.id}`} className="flex max-w-sm min-w-sm bg-white shadow-lg rounded-lg overflow-hidden hover:bg-indigo-100 hover:shadow-xl hover:cursor-pointer">
           <div className="w-32 bg-cover" style={{backgroundImage: "url('https://images.demandware.net/dw/image/v2/BBBV_PRD/on/demandware.static/-/Sites-master-catalog/default/dwd633af54/images/700000/704909.jpg?sfrm=jpg')"}}>
           </div> 
           <div className="w-64 p-4">
@@ -23,6 +25,6 @@ export const Card = ({ articulo }) => {
               <button className="px-3 py-2 bg-gray-800 text-white text-xs font-bold uppercase w-28 rounded">Añadir</button>
             </div>
           </div>
-        </div>
+        </Link>
     );
 };

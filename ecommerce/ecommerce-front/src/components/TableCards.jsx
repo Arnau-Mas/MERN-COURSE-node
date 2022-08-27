@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useEffect } from "react"
 import { Card } from "./Card"
 import { Sidebar } from "./Sidebar"
+import {Link} from "react-router-dom";
 
 export const TableCards = () => {
   const [articulos, setArticulos] = useState([]);
@@ -17,10 +18,10 @@ export const TableCards = () => {
   
   return (
     <div className="flex flex-row">
-      <Sidebar/>
-        <div style={{marginLeft:"18.1rem", marginTop:"4rem"}} className="py-9 flex flex-col gap-4">
+      {/* <Sidebar/> */}
+        <div className="py-9 flex flex-col gap-4">
           <div>
-            <button className="px-3 py-2 bg-green-700 text-white text-xs font-bold uppercase rounded">Nuevo artículo</button>
+            <Link to="/nuevoArticulo" className="px-3 py-2 bg-green-700 text-white text-xs font-bold uppercase rounded">Nuevo artículo</Link>
           </div>
           <div className="flex flex-row flex-wrap gap-4 justify-center">
             {articulos.length===0 ? 

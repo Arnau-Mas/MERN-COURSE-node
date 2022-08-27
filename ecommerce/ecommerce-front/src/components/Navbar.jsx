@@ -3,10 +3,11 @@ import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, ShoppingCartIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 import {Sidebar} from "./Sidebar.jsx"
+import { Link } from 'react-router-dom'
 
 const navigation = [
-  { name: 'Artículos', href: '#', current: true },
-  { name: 'Facturas', href: '#', current: false },
+  { name: 'Artículos', href: '/', current: true },
+  { name: 'Facturas', href: '/facturas', current: false },
   { name: 'Projects', href: '#', current: false },
   { name: 'Calendar', href: '#', current: false },
 ]
@@ -17,7 +18,7 @@ function classNames(...classes) {
 
 export const Navbar = () => {
   return (
-    <Disclosure as="nav" className="bg-gray-800 w-full fixed">
+    <Disclosure as="nav" className="bg-gray-800 w-full">
       {({ open }) => (
         <>
           <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
@@ -49,19 +50,51 @@ export const Navbar = () => {
                 </div>
                 <div className="hidden sm:block sm:ml-6">
                   <div className="flex space-x-4">
-                    {navigation.map((item) => (
-                      <a
-                        key={item.name}
-                        href={item.href}
+                      <Link
+                        key={navigation[0].name}
+                        to={navigation[0].href}
                         className={classNames(
-                          item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                          navigation[0].current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                           'px-3 py-2 rounded-md text-sm font-medium'
                         )}
-                        aria-current={item.current ? 'page' : undefined}
+                        aria-current={navigation[0].current ? 'page' : undefined}
                       >
-                        {item.name}
-                      </a>
-                    ))}
+                        {navigation[0].name}
+                      </Link>
+                      <Link
+                        key={navigation[1].name}
+                        to={navigation[1].href}
+                        className={classNames(
+                          navigation[1].current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                          'px-3 py-2 rounded-md text-sm font-medium'
+                        )}
+                        aria-current={navigation[1].current ? 'page' : undefined}
+                      >
+                        {navigation[1].name}
+                      </Link>
+                      <Link
+                        key={navigation[2].name}
+                        to={navigation[2].href}
+                        className={classNames(
+                          navigation[2].current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                          'px-3 py-2 rounded-md text-sm font-medium'
+                        )}
+                        aria-current={navigation[2].current ? 'page' : undefined}
+                      >
+                        {navigation[2].name}
+                      </Link>
+                      <Link
+                        key={navigation[3].name}
+                        to={navigation[3].href}
+                        className={classNames(
+                          navigation[3].current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                          'px-3 py-2 rounded-md text-sm font-medium'
+                        )}
+                        aria-current={navigation[3].current ? 'page' : undefined}
+                      >
+                        {navigation[3].name}
+                      </Link>
+
                   </div>
                 </div>
               </div>

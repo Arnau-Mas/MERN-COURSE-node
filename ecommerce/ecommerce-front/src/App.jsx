@@ -1,3 +1,4 @@
+import { Outlet } from "react-router-dom"
 import {Navbar} from "./components/Navbar"
 import { Sidebar } from "./components/Sidebar"
 import { TableCards } from "./components/TableCards"
@@ -5,9 +6,11 @@ import { TableCards } from "./components/TableCards"
 function App() {
 
   return (
-    <div className="bg-gray-200 relative">
+    <div className="bg-gray-200 relative h-screen">
       <Navbar/>
-      <TableCards/>
+      <div>
+        <Outlet/>
+      </div>
     </div>
   )
 }
