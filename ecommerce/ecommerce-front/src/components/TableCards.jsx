@@ -1,7 +1,6 @@
 import { useState } from "react"
 import { useEffect } from "react"
 import { Card } from "./Card"
-import { NewCard } from "./NewCard"
 import { Sidebar } from "./Sidebar"
 
 export const TableCards = () => {
@@ -20,9 +19,9 @@ export const TableCards = () => {
     <div className="flex flex-row">
       <Sidebar/>
         <div style={{marginLeft:"18.1rem", marginTop:"4rem"}} className="py-9 flex flex-col gap-4">
-{/*           <div className="">
+          <div>
             <button className="px-3 py-2 bg-green-700 text-white text-xs font-bold uppercase rounded">Nuevo artículo</button>
-          </div> */}
+          </div>
           <div className="flex flex-row flex-wrap gap-4 justify-center">
             {articulos.length===0 ? 
               <>
