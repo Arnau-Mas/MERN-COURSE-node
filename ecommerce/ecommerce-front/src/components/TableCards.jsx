@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useEffect } from "react"
 import { Card } from "./Card"
+import { NewCard } from "./NewCard"
 import { Sidebar } from "./Sidebar"
 
 export const TableCards = () => {
@@ -33,6 +34,7 @@ export const TableCards = () => {
                   <Card articulo={{nombre:"aaaa", precio:"aaaa"}}/>
               </>
               :
+              
               articulos.map(articulo => <Card key={articulo.id} articulo={articulo}/>)
               }
           </div>
