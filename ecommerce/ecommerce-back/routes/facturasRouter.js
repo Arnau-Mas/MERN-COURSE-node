@@ -20,14 +20,21 @@ const Factura = sequelize.define('Factura', {
     poblacion:DataTypes.STRING(100),
     cpostal: DataTypes.STRING(10),
     nombre: DataTypes.STRING(150),
-    ClienteId:DataTypes.INTEGER,
+    ClienteId:{
+        type:DataTypes.INTEGER,
+        field:"ClienteId",
+        references:{
+            model:Cliente,
+            key:"id"
+        }
+    }
 }, { tableName: 'facturas', timestamps: false });
 
-/* Factura.belongsTo(Cliente); */
+Factura.belongsTo(Cliente)
 
 router.get("/", (req,res) => {
     sequelize.sync().then(() => {
-        Factura.findAll()
+        Factura.findAll({ include:{model: Cliente} })
             .then(facturas => res.json({
                 ok:true,
                 data:facturas
@@ -43,6 +50,24 @@ router.get("/", (req,res) => {
     })
 })
 
+router.get("/cliente/:id", (req,res) => {
+    const id = req.params.id;
+    sequelize.sync().then(() => {
+        Factura.findAll({ where:{ClienteId:id} })
+            .then(facturas => res.json({
+                ok:true,
+                data:facturas
+            }))
+            .catch(err => res.json({
+                ok:false,
+                error:err.message
+            }))
+        .catch(err => res.json({
+            ok:false,
+            error:err.message
+        }))
+    })
+})
 
 router.post('/', (req, res) => {
     
