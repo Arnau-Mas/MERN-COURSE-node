@@ -39,7 +39,7 @@ router.get("/", (req,res) => {
 router.get("/:id", (req,res) => {
     const id = req.params.id;
     sequelize.sync().then(() => { 
-        Articulo.findOne({where: {idarticulos:id}})
+        Articulo.findOne({where: {id:id}})
             .then(articulo =>{
                 res.json({ 
                     ok: true,
