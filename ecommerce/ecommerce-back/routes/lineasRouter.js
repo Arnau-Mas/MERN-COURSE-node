@@ -84,26 +84,14 @@ router.get("/factura/:id", (req,res) => {
 })
 
 router.post("/factura/:idf/articulo/:ida/:qtt", (req,res) => {
-   /*  const {idf, ida, qtt} = req.params;
-    sequelize.sync().then(async () => {
-        try {
-            const factura = await Factura.create(req.body)
-        return res.json({
+   const {idf, ida, qtt} = req.params;
+    sequelize.sync().then(() => {
+        Linea.create(req.body)
+        .then(linea => res.json({
             ok:true,
-            data:factura
-        })
-        } catch (error) {
-            return res.json({
-                ok:false,
-                data:error.message
-            })
-        }
-    }).catch((error) => {
-        res.json({
-            ok: false,
-            error: error
-        })
-    }); */
+            linea
+        }))
+    })
 })
 
 
