@@ -1,10 +1,12 @@
 import { useState } from "react"
 import { useEffect } from "react"
-
+import ContextUser from '../context/ContextUser.jsx'
+import { useContext } from "react"
 export const Facturas = () => {
+    const {userId} = useContext(ContextUser);
     const [facturas, setFacturas] = useState([]);
     useEffect(() => {
-        fetch("http://localhost:3000/facturas")
+        fetch(`http://localhost:3000/facturas/cliente/${userId}`)
         .then(res => res.json())
         .then(data => {
             setFacturas(data.data)

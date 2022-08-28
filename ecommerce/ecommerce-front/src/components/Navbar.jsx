@@ -1,5 +1,5 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment, useContext } from 'react'
+import { Fragment, useContext, useEffect, useState } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, ShoppingCartIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 import ContextCesta from '../context/ContextCesta.jsx'
@@ -19,6 +19,13 @@ function classNames(...classes) {
 
 export const Navbar = () => {
   const {cesta} = useContext(ContextCesta);
+  const [cantidadArticulos, setCantidadArticulos] = useState(0)
+
+  useEffect(() => {
+    console.log("nouarticle")
+    const nuevaCantidad = cesta.reduce((prev, curr) => prev+curr.cantidad, 0)
+    setCantidadArticulos(nuevaCantidad)
+  }, [cesta]);
   return (
     <Disclosure as="nav" className="bg-gray-800 w-full">
       {({ open }) => (
@@ -108,7 +115,7 @@ export const Navbar = () => {
                   <span className="sr-only">View notifications</span>
                   <Link className="relative" to="/cesta">
                      <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
-                     <p style={{borderRadius:"100%", fontSize:"0.8rem"}} className='bg-orange-400 flex align-middle items-center justify-center w-4 h-4 absolute bottom-4 text-black left-2 font-semibold'>{cesta.length}</p>
+                     <p style={{borderRadius:"100%", fontSize:"0.8rem"}} className='bg-orange-400 flex align-middle items-center justify-center w-4 h-4 absolute bottom-4 text-black left-2 font-semibold'>{cantidadArticulos}</p>
                   </Link>
                 </button>
 
@@ -140,7 +147,7 @@ export const Navbar = () => {
                             href="#"
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
-                            Your Profile
+                            Arnau
                           </a>
                         )}
                       </Menu.Item>
@@ -150,7 +157,7 @@ export const Navbar = () => {
                             href="#"
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
-                            Settings
+                            John
                           </a>
                         )}
                       </Menu.Item>
@@ -160,7 +167,17 @@ export const Navbar = () => {
                             href="#"
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
-                            Sign out
+                            Homer
+                          </a>
+                        )}
+                      </Menu.Item>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <a
+                            href="#"
+                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700 bg-green-500')}
+                          >
+                            Nuevo cliente
                           </a>
                         )}
                       </Menu.Item>
