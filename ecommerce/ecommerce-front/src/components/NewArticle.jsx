@@ -40,9 +40,7 @@ export const NewArticle = () => {
         </>
         :
         <>
-        <h3>Artículo añadido!</h3>
-        <Card articulo={articulo} />
-        <Link to="/"  className="bg-gray-700 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded">Volver a artículos</Link>
+        <h3 className="text-4xl">Artículo {articulo.nombre} añadido!</h3>
         </>
         }
       </div>

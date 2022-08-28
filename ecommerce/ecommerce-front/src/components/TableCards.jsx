@@ -3,7 +3,7 @@ import { useEffect } from "react"
 import { Card } from "./Card"
 import { Sidebar } from "./Sidebar"
 import {Link} from "react-router-dom";
-
+import { useContext } from "react";
 export const TableCards = () => {
   const [articulos, setArticulos] = useState([]);
   useEffect(() => {

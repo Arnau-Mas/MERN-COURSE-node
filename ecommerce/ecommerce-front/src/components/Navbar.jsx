@@ -1,7 +1,8 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment } from 'react'
+import { Fragment, useContext } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, ShoppingCartIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
+import ContextCesta from '../context/ContextCesta.jsx'
 import {Sidebar} from "./Sidebar.jsx"
 import { Link } from 'react-router-dom'
 
@@ -17,6 +18,7 @@ function classNames(...classes) {
 }
 
 export const Navbar = () => {
+  const {cesta} = useContext(ContextCesta);
   return (
     <Disclosure as="nav" className="bg-gray-800 w-full">
       {({ open }) => (
@@ -104,7 +106,10 @@ export const Navbar = () => {
                   className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
                 >
                   <span className="sr-only">View notifications</span>
-                  <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
+                  <Link className="relative" to="/cesta">
+                     <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
+                     <p style={{borderRadius:"100%", fontSize:"0.8rem"}} className='bg-orange-400 flex align-middle items-center justify-center w-4 h-4 absolute bottom-4 text-black left-2 font-semibold'>{cesta.length}</p>
+                  </Link>
                 </button>
 
                 {/* Profile dropdown */}
