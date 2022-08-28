@@ -4,6 +4,15 @@ import sequelize from "../loadSequelize.js";
 
 const router = express.Router();
 
+
+const Articulo = sequelize.define('Articulo', {
+    nombre: DataTypes.STRING(150),
+    descripcion:DataTypes.STRING(1500),
+    precio:DataTypes.FLOAT(10,2),
+    estoc:DataTypes.FLOAT(10,2)
+}, { tableName: 'articulos', timestamps: false });
+
+
 const Cliente = sequelize.define("Cliente", {
     email:DataTypes.STRING(150),
     nombre:DataTypes.STRING(150),
@@ -30,11 +39,33 @@ const Factura = sequelize.define('Factura', {
     }
 }, { tableName: 'facturas', timestamps: false });
 
-Factura.belongsTo(Cliente)
+
+const Linea = sequelize.define('Linea', {
+    cantidad: DataTypes.INTEGER(11),
+    ArticuloId:{
+        type:DataTypes.INTEGER,
+        field:"ArticuloId",
+        references:{
+            model:Articulo,
+            key:"id"
+        }
+    },
+    FacturaId:{
+        type:DataTypes.INTEGER,
+        field:"FacturaId",
+        references:{
+            model:Factura,
+            key:"id"
+        }
+    }
+}, { tableName: 'lineas', timestamps: false });
+
+Factura.belongsTo(Cliente);
+Factura.hasMany(Linea);
 
 router.get("/", (req,res) => {
     sequelize.sync().then(() => {
-        Factura.findAll({ include:{model: Cliente} })
+        Factura.findAll({ include:[Cliente,Linea] })
             .then(facturas => res.json({
                 ok:true,
                 data:facturas
