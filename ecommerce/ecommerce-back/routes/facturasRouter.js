@@ -84,7 +84,7 @@ router.get("/", (req,res) => {
 router.get("/cliente/:id", (req,res) => {
     const id = req.params.id;
     sequelize.sync().then(() => {
-        Factura.findAll({ where:{ClienteId:id} })
+        Factura.findAll({include:[Cliente, Linea], where:{ClienteId:id}})
             .then(facturas => res.json({
                 ok:true,
                 data:facturas
