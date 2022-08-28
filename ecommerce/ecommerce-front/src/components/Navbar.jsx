@@ -3,6 +3,7 @@ import { Fragment, useContext, useEffect, useState } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, ShoppingCartIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 import ContextCesta from '../context/ContextCesta.jsx'
+import ContextUser from "../context/ContextUser"
 import {Sidebar} from "./Sidebar.jsx"
 import { Link } from 'react-router-dom'
 
@@ -19,6 +20,7 @@ function classNames(...classes) {
 
 export const Navbar = () => {
   const {cesta} = useContext(ContextCesta);
+  const {userId} = useContext(ContextUser);
   const [cantidadArticulos, setCantidadArticulos] = useState(0)
 
   useEffect(() => {
@@ -108,6 +110,7 @@ export const Navbar = () => {
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+              <p className='text-white'>user: {userId} | </p>
                 <button
                   type="button"
                   className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
@@ -143,42 +146,22 @@ export const Navbar = () => {
                     <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                       <Menu.Item>
                         {({ active }) => (
-                          <a
+                          <p
                             href="#"
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
-                            Arnau
-                          </a>
+                            User: {userId}
+                          </p>
                         )}
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
-                          <a
+                          <Link to="/cambiarUser"
                             href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700 bg-gray-200')}
                           >
-                            John
-                          </a>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                          >
-                            Homer
-                          </a>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700 bg-green-500')}
-                          >
-                            Nuevo cliente
-                          </a>
+                            Cambiar usuario
+                          </Link>
                         )}
                       </Menu.Item>
                     </Menu.Items>

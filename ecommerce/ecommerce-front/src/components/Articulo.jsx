@@ -15,6 +15,9 @@ export const Articulo = () => {
     <div>
         <h1 className="text-4xl">ARTICULO</h1>
         <p>{articulo.nombre}</p>
+        <p>{articulo.descripcion}</p>
+        <p>{articulo.precio}€</p>
+        <p>Estoc: {articulo.estoc}</p>
     </div>
   )
 }

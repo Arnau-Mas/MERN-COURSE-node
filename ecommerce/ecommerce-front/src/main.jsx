@@ -8,6 +8,7 @@ import { NewArticle } from './components/newArticle'
 import { Facturas } from './components/Facturas'
 import { Articulo } from './components/Articulo'
 import { CestaCompra } from './components/CestaCompra'
+import { CambiarUser } from './components/CambiarUser'
 
 
 // TODO Instal·lar router
@@ -26,6 +27,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path="/facturas" element={<Facturas/>}/>
           <Route path="/articulo/:id" element={<Articulo/>}/>
           <Route path="/cesta" element={<CestaCompra/>}/>
+          <Route path="/cambiarUser" element={<CambiarUser/>}/>
         </Route>    
       </Routes>
     </BrowserRouter>
