@@ -54,6 +54,23 @@ export const CestaCompra = () => {
     setCesta(prev => cestaExistente)
     }
 
+    function addLinea(articulo, id){
+      console.log("id", articulo.id)
+      console.log("idFactura", id)
+      fetch('http://localhost:3000/lineas', {
+      method: "POST",
+      body: JSON.stringify(	{
+        cantidad:articulo.cantidad,
+        FacturaId: id,
+        ArticuloId:articulo.id
+      }),
+      headers: {"Content-type": "application/json; charset=UTF-8"}
+      })
+      .then(response => response.json()) 
+      .then(json => console.log(json))
+      .catch(err => console.log(err))
+    }
+
     function pagarArticulo(){
       const date = new Date();
       console.log(ContextUser)
@@ -71,27 +88,13 @@ export const CestaCompra = () => {
       })
       .then(response => response.json()) 
       .then(json => {
-        if(json.ok===true){
-          // ! AFEGIR CADA ARTICLE A LINEAS RELACIONANT FACTURA O ID USER
-          fetch('http://localhost:3000/lineas', {
-            method: "POST",
-            body: JSON.stringify(	{
-              fecha: `${date.getFullYear()}-${date.getMonth() < 10 ? `${0}${date.getMonth()}` : date.getMonth()}-${date.getMonth() < 10 ? `${0}${date.getDay()}` : date.getDay()}`,
-              direccion: "C/Marquesa 3",
-              poblacion: "Barcelona",
-              cpostal: "08123",
-              nombre: "Factura Y",
-              ClienteId:userId
-            }),
-            headers: {"Content-type": "application/json; charset=UTF-8"}
+              if(json.ok===true){
+                cesta.map(articulo => addLinea(articulo, json.data.id))
+              }
             })
-            .then(response => response.json()) 
-            .then(json => console.log(json))
-            .catch(err => setError(err))
+            .catch(err => console.log(err))
         }
-      })
-      .catch(err => setError(err))
-    }
+
   return (
     <div>
         <h1>CestaCompra</h1>

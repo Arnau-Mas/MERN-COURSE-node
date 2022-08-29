@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 import ContextUser from "../context/ContextUser"
 
 /* 
@@ -20,7 +21,7 @@ function cambiarUser(id){
         <ul>
             {users.map(user => <li key={user.id}><button onClick={() => cambiarUser(user.id)}>{user.nombre} | {user.id}</button></li>)}
         </ul>
-        <p>New User</p>
+        <Link to="/newUser">New User</Link>
     </div>
   )
 }

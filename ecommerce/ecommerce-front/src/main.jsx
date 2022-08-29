@@ -9,6 +9,7 @@ import { Facturas } from './components/Facturas'
 import { Articulo } from './components/Articulo'
 import { CestaCompra } from './components/CestaCompra'
 import { CambiarUser } from './components/CambiarUser'
+import { NewUser } from './components/NewUser'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -21,6 +22,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path="/articulo/:id" element={<Articulo/>}/>
           <Route path="/cesta" element={<CestaCompra/>}/>
           <Route path="/cambiarUser" element={<CambiarUser/>}/>
+          <Route path="/newUser" element={<NewUser/>}/>
         </Route>    
       </Routes>
     </BrowserRouter>
