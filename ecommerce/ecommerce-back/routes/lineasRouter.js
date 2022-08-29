@@ -82,15 +82,22 @@ router.get("/factura/:id", (req,res) => {
     }))
 })
 
-router.post("/factura/:idf/articulo/:ida/:qtt", (req,res) => {
-   const {idf, ida, qtt} = req.params;
+router.post("/", (req,res) => {
     sequelize.sync().then(() => {
         Linea.create(req.body)
         .then(linea => res.json({
             ok:true,
             linea
         }))
+        .catch(err => res.json({
+            ok:false,
+            error:err.message
+        }))
     })
+    .catch(err => res.json({
+        ok:false,
+        error:err.message
+    }))
 })
 
 
