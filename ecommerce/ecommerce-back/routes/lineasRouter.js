@@ -12,7 +12,6 @@ const Articulo = sequelize.define('Articulo', {
 }, { tableName: 'articulos', timestamps: false });
 
 const Factura = sequelize.define('Factura', {
-    numero: DataTypes.STRING(15),
     fecha:DataTypes.DATE,
     direccion:DataTypes.STRING(150),
     poblacion:DataTypes.STRING(100),

@@ -23,7 +23,6 @@ const Cliente = sequelize.define("Cliente", {
 }, { tableName: 'clientes', timestamps: false })
 
 const Factura = sequelize.define('Factura', {
-    numero: DataTypes.STRING(15),
     fecha:DataTypes.DATE,
     direccion:DataTypes.STRING(150),
     poblacion:DataTypes.STRING(100),
@@ -60,12 +59,14 @@ const Linea = sequelize.define('Linea', {
     }
 }, { tableName: 'lineas', timestamps: false });
 
-Factura.belongsTo(Cliente);
-Factura.hasMany(Linea);
+
+Factura.belongsToMany(Articulo,  {through: Linea, foreignKey:"FacturaId"});
+Articulo.belongsToMany(Factura, {through: Linea, foreignKey:"ArticuloId"})
+Factura.belongsTo(Cliente)
 
 router.get("/", (req,res) => {
     sequelize.sync().then(() => {
-        Factura.findAll({ include:[Cliente,Linea] })
+        Factura.findAll({ include:[Cliente, Articulo] })
             .then(facturas => res.json({
                 ok:true,
                 data:facturas
@@ -84,7 +85,7 @@ router.get("/", (req,res) => {
 router.get("/cliente/:id", (req,res) => {
     const id = req.params.id;
     sequelize.sync().then(() => {
-        Factura.findAll({include:[Cliente, Linea], where:{ClienteId:id}})
+        Factura.findAll({include:[Cliente, Articulo], where:{ClienteId:id}})
             .then(facturas => res.json({
                 ok:true,
                 data:facturas
