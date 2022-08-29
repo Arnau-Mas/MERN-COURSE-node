@@ -7,6 +7,7 @@ import { useContext } from "react";
 export const TableCards = () => {
   const [articulos, setArticulos] = useState([]);
   useEffect(() => {
+    console.log("aaa")
     fetch("http://localhost:3000/articulos")
     .then(res => res.json())
     .then(data => {
@@ -26,12 +27,7 @@ export const TableCards = () => {
           <div className="flex flex-row flex-wrap gap-4 justify-center">
             {articulos.length===0 ? 
               <>
-                  <Card articulo={{nombre:"aaaa", precio:"aaaa"}}/>
-                  <Card articulo={{nombre:"aaaa", precio:"aaaa"}}/>
-                  <Card articulo={{nombre:"aaaa", precio:"aaaa"}}/>
-                  <Card articulo={{nombre:"aaaa", precio:"aaaa"}}/>
-                  <Card articulo={{nombre:"aaaa", precio:"aaaa"}}/>
-                  <Card articulo={{nombre:"aaaa", precio:"aaaa"}}/>
+                  <h1>No hay articulos</h1>
               </>
               :
               

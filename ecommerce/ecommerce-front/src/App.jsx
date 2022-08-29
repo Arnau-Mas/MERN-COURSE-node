@@ -7,14 +7,8 @@ import { TableCards } from "./components/TableCards"
 import { useState } from "react"
 
 function App() {
-  let userLocal = localStorage.getItem('userEcommerce');
-  if(!userLocal){
-    userLocal = {
-      id:1
-    };
-  }else{
-    userLocal = JSON.parse(userLocal)
-  }
+  let userLocal = JSON.parse(localStorage.getItem('userEcommerce')) || {id:1};
+  
   const [cesta, setCesta] = useState([])
   const [userId, setUserId] = useState(userLocal.id);
   return (

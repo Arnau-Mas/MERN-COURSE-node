@@ -9,6 +9,7 @@ export const Facturas = () => {
         fetch(`http://localhost:3000/facturas/cliente/${userId}`)
         .then(res => res.json())
         .then(data => {
+            console.log(data)
             setFacturas(data.data)
         })
     }, [])
@@ -18,16 +19,20 @@ export const Facturas = () => {
         {facturas.map(factura => {
             console.log(factura)
             return (
-                <div className="bg-gray-300 mb-2">
-                    <p>{factura.numero}</p>
+                <div key={factura.id} className="bg-gray-300 mb-2">
+                    <p>{factura.id}</p>
                     <p>{factura.fecha}</p>
                     <p>{factura.direccion}</p>
                     <p>{factura.poblacion}</p>
                     <p>{factura.cpostal}</p>
                     <p>{factura.nombre}</p>
                     <p>Articulos:</p>
-                    <p>{factura.Lineas[0].id}</p> Com mostrar això ? amb include? fent un fetch a lineas? fent un fetch a articulo? 
-                    <p>{factura.Lineas[0].cantidad}</p>
+                    {factura.Articulos.map(articulo => (
+                        <div key={articulo.id}>
+                            <p>{articulo.nombre}</p>
+                            <p>{articulo.Linea.cantidad}</p>
+                        </div>
+                    ))}
                 </div>
             )
         })}

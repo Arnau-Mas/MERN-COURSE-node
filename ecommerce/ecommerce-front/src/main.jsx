@@ -10,13 +10,6 @@ import { Articulo } from './components/Articulo'
 import { CestaCompra } from './components/CestaCompra'
 import { CambiarUser } from './components/CambiarUser'
 
-
-// TODO Instal·lar router
-// TODO Crear ruta afegir article 
-// TODO 
-// TODO 
-// TODO 
-
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>

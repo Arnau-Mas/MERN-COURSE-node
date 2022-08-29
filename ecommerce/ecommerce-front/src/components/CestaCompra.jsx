@@ -6,6 +6,7 @@ import ContextUser from "../context/ContextUser"
 
 export const CestaCompra = () => {
     const {cesta, setCesta} = useContext(ContextCesta);
+    const {userId} = useContext(ContextUser);
     function pagarArticulo(){
       /* 
       TODO Configurar el fetch a lineas o a facturas o als dos? 
@@ -52,6 +53,45 @@ export const CestaCompra = () => {
     }
     setCesta(prev => cestaExistente)
     }
+
+    function pagarArticulo(){
+      const date = new Date();
+      console.log(ContextUser)
+      fetch('http://localhost:3000/facturas', {
+      method: "POST",
+      body: JSON.stringify(	{
+        fecha: `${date.getFullYear()}-${date.getMonth() < 10 ? `${0}${date.getMonth()}` : date.getMonth()}-${date.getMonth() < 10 ? `${0}${date.getDay()}` : date.getDay()}`,
+        direccion: "C/Marquesa 3",
+        poblacion: "Barcelona",
+        cpostal: "08123",
+        nombre: "Factura Y",
+        ClienteId:userId
+      }),
+      headers: {"Content-type": "application/json; charset=UTF-8"}
+      })
+      .then(response => response.json()) 
+      .then(json => {
+        if(json.ok===true){
+          // ! AFEGIR CADA ARTICLE A LINEAS RELACIONANT FACTURA O ID USER
+          fetch('http://localhost:3000/lineas', {
+            method: "POST",
+            body: JSON.stringify(	{
+              fecha: `${date.getFullYear()}-${date.getMonth() < 10 ? `${0}${date.getMonth()}` : date.getMonth()}-${date.getMonth() < 10 ? `${0}${date.getDay()}` : date.getDay()}`,
+              direccion: "C/Marquesa 3",
+              poblacion: "Barcelona",
+              cpostal: "08123",
+              nombre: "Factura Y",
+              ClienteId:userId
+            }),
+            headers: {"Content-type": "application/json; charset=UTF-8"}
+            })
+            .then(response => response.json()) 
+            .then(json => console.log(json))
+            .catch(err => setError(err))
+        }
+      })
+      .catch(err => setError(err))
+    }
   return (
     <div>
         <h1>CestaCompra</h1>
@@ -70,9 +110,9 @@ export const CestaCompra = () => {
                 <button onClick={() => eliminarArticulo(articulo.id)} className="px-3 py-2 bg-red-700 text-white text-xs font-bold uppercase rounded">Eliminar</button>
             </div>
         ) )}
-      <div>
+      <div className="pt-4 gap-2 flex">
             <button onClick={pagarArticulo} className="px-3 py-2 bg-green-700 text-white text-xs font-bold uppercase rounded">Pagar</button>
-            <button onClick={() => setCesta([])} className="px-3 py-2 bg-red-700 text-white text-xs font-bold uppercase rounded">Eliminar toda la cesta</button>
+            <button onClick={() => setCesta([])} className="px-3 py-2 bg-red-400 text-white text-xs font-bold uppercase rounded">Eliminar toda la cesta</button>
           </div>
     </div>
   )
