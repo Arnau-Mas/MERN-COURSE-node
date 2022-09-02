@@ -20,7 +20,7 @@ export const TableCards = () => {
   return (
     <div className="flex flex-row">
       {/* <Sidebar/> */}
-        <div className="py-9 flex flex-col gap-4 w-10/12 justify-center align-middle items-center mx-auto">
+        <div style={{width:"93.8%"}} className="py-9 flex flex-col gap-4 w-11/12 justify-center align-middle items-center mx-auto">
             <div className="w-full">
               <Link to="/nuevoArticulo" className="px-3 py-2 bg-green-700 text-white text-xs font-bold uppercase rounded">Nuevo artículo</Link>
             </div>
