@@ -20,11 +20,11 @@ export const TableCards = () => {
   return (
     <div className="flex flex-row">
       {/* <Sidebar/> */}
-        <div className="py-9 flex flex-col gap-4">
-          <div>
-            <Link to="/nuevoArticulo" className="px-3 py-2 bg-green-700 text-white text-xs font-bold uppercase rounded">Nuevo artículo</Link>
-          </div>
-          <div className="flex flex-row flex-wrap gap-4 justify-center">
+        <div className="py-9 flex flex-col gap-4 w-10/12 justify-center align-middle items-center mx-auto">
+            <div className="w-full">
+              <Link to="/nuevoArticulo" className="px-3 py-2 bg-green-700 text-white text-xs font-bold uppercase rounded">Nuevo artículo</Link>
+            </div>
+          <div className="flex flex-row flex-wrap gap-4">
             {articulos.length===0 ? 
               <>
                   <h1>No hay articulos</h1>

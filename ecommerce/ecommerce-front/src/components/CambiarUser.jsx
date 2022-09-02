@@ -17,7 +17,7 @@ function cambiarUser(id){
     setUserId(id) 
 }
   return (
-    <div>
+    <div className="h-screen">
         <ul>
             {users.map(user => <li key={user.id}><button onClick={() => cambiarUser(user.id)}>{user.nombre} | {user.id}</button></li>)}
         </ul>

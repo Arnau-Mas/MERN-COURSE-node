@@ -14,7 +14,7 @@ function App() {
   return (
     <ContextUser.Provider value={{userId, setUserId}}>
     <ContextCesta.Provider value={{cesta, setCesta}} >
-    <div className="bg-gray-200 relative h-screen">
+    <div className="bg-gray-200 relative h-full">
       <Navbar/>
       <div>
         <Outlet/>
