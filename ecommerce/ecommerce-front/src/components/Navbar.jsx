@@ -29,7 +29,7 @@ export const Navbar = () => {
     setCantidadArticulos(nuevaCantidad)
   }, [cesta]);
   return (
-    <Disclosure as="nav" className="bg-gray-800 w-full">
+    <Disclosure as="nav" className="bg-gray-800 w-full fixed z-10">
       {({ open }) => (
         <>
           <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">

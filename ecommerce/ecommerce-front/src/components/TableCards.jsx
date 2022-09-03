@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useEffect } from "react"
-import { Card } from "./Card"
+import { EditableCard } from "./EditableCard"
 import { Sidebar } from "./Sidebar"
 import {Link} from "react-router-dom";
 import { useContext } from "react";
@@ -19,19 +19,16 @@ export const TableCards = () => {
   
   return (
     <div className="flex flex-row">
-      {/* <Sidebar/> */}
-        <div style={{width:"93.8%"}} className="py-9 flex flex-col gap-4 w-11/12 justify-center align-middle items-center mx-auto">
-            <div className="w-full">
-              <Link to="/nuevoArticulo" className="px-3 py-2 bg-green-700 text-white text-xs font-bold uppercase rounded">Nuevo artículo</Link>
-            </div>
-          <div className="flex flex-row flex-wrap gap-4">
+      <Sidebar/>
+        <div style={{width:"93.8%"}} className="ml-80 mt-16 py-9 flex flex-col gap-4 w-11/12 justify-center align-middle items-center mx-auto">
+          <div className="flex flex-row flex-wrap gap-4 mx-auto justify-center">
             {articulos.length===0 ? 
               <>
                   <h1>No hay articulos</h1>
               </>
               :
               
-              articulos.map(articulo => <Card key={articulo.id} articulo={articulo}/>)
+              articulos.map(articulo => <EditableCard key={articulo.id} articulo={articulo}/>)
               }
           </div>
         </div>
